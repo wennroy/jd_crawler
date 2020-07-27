@@ -22,7 +22,7 @@
 | item_name    | 商品名称                                                     |
 | price        | 商品价格                                                     |
 | shopname     | 商铺名称                                                     |
-| counting     | 计算在爬取过程中该商品重复了几次                             |
+| counting*     | 计算在爬取过程中该商品重复了几次                             |
 | comment_num  | 评论数量                                                     |
 | start_time   | 开始爬取的时间                                               |
 | end_time     | 存储的时间                                                   |
