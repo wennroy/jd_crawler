@@ -18,3 +18,8 @@ class LenovoItem(scrapy.Item):
     item_id = scrapy.Field()
     start_time = scrapy.Field()
     end_time = scrapy.Field()
+    GoodRate = scrapy.Field()
+    DefaultGoodCount = scrapy.Field()
+    PoorCount = scrapy.Field()
+    PoorRate = scrapy.Field()
+    GoodCount = scrapy.Field()
