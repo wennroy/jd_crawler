@@ -31,6 +31,8 @@
 
 *仅mysql数据库有。
 
+*之前的写入方法为`pymysql`直接写入，在这个版本，将利用ORM的方式，也就是`sqlAlchemy`模块来写入`mysql`数据库。
+
 ### 如何使用
 
 若要更改爬取的信息，打开`lenovo/__init__.py`，更改里面对应的参数即可。一般利用pycharm直接打开，直接运行`lenovo\spiders\quotes_spider.py`也可以，只不过文件会保存在spiders文件夹下。
