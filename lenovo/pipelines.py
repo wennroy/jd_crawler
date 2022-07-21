@@ -34,12 +34,12 @@ class LenovoPipeline:
                             price float default 0,
                             shopname varchar(50),
                             counting smallint default 0,
-                            comment_num float default 0,
+                            comment_num varchar(20) default '0',
                             GoodRate float default 0,
-                            GoodCount int default 0,
-                            DefaultGoodCount int default 0,
+                            GoodCountstr varchar(20) default '0',
+                            DefaultGoodCountstr varchar(20) default '0',
                             PoorRate float default 0,
-                            PoorCount int default 0,
+                            PoorCountstr varchar(20) default '0',
                             start_time datetime default NULL,
                             end_time datetime default NULL,
                             create_time  timestamp DEFAULT current_timestamp COMMENT '创建时间',
@@ -67,7 +67,7 @@ class LenovoPipeline:
         # print(self.item_list)
         if activate_mysql == True:
             insert_sql = '''INSERT INTO %s(item_name, price,shopname,comment_num,item_id,start_time,end_time,
-            GoodRate,GoodCount,DefaultGoodCount,PoorRate,PoorCount) VALUES('%s',%d,'%s','%s',%d,'%s','%s',%f,%d,%d,%f,%d)
+            GoodRate,GoodCountstr,DefaultGoodCountstr,PoorRate,PoorCountstr) VALUES('%s',%d,'%s','%s',%d,'%s','%s',%f,'%s','%s',%f,'%s')
             on duplicate key update counting=counting+1;'''
             print(insert_sql % (self.search_name,
                                 item['name'], float(item['price']), item['shopname'], item['num_comment'],

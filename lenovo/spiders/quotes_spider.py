@@ -58,13 +58,14 @@ class QuotesSpider(scrapy.Spider):
             #     print(content.xpath(".//div[@class='p-name p-name-type-2']/a/em/text()").get())
                 ## '<em><font class="skcolor_ljg">联想</font>拯救者Y7000P 2020新品英特尔10代酷睿i7电竞屏吃鸡游戏本 15.6英高色域笔记本电脑 标配【i7-10875H 16G内存 512固态】 RTX2060/GTX1660Ti 6G钛晶灰</em>'
                 ##<em><span class="p-tag" style="background-color:#c81623">京品电脑</span>\t\n<font class="skcolor_ljg">联想</font>小新Air14 2020锐龙版(全新7nm)六核金属超轻薄笔记本电脑 学生本商务设计游戏轻薄本 标配【R5 4600U 16G内存 512固态】灰</em>'
+
             item_name = ''
             for i in content.xpath(".//div[@class='p-name p-name-type-2']/a/em//text()").getall():
                 item_name += i.strip()
             item_name = item_name.strip()
             # item_name.replace('<em><font class="skcolor_ljg">联想</font>','联想')
             # item_name.replace('</em>','')
-            if re.findall(r'[\u4E00-\u9FA5A-Za-z0-9_]+', item_name) == []:
+            if re.findall(r'[\u4E00-\u9FA5A-Za-z0-9_]+', item_name) == []:  # \u4E00-\u9FA5判断是否是中文
                 item_name = content.xpath(".//div[@class='p-name p-name-type-2']/a/em").get()
                 item_name = item_name[item_name.find('</font>') + 7:-5]
             item_name = item_name.strip()
@@ -94,11 +95,11 @@ class QuotesSpider(scrapy.Spider):
     def parse_2(self, response):
         import json
         comment_dict = json.loads(response.text)
-        comment_num = comment_dict['CommentsCount'][0]['CommentCount']
+        comment_num = comment_dict['CommentsCount'][0]['CommentCountStr']
         GoodRate = comment_dict['CommentsCount'][0]['GoodRate']
-        DefaultGoodCount = comment_dict['CommentsCount'][0]['DefaultGoodCount']
-        GoodCount = comment_dict['CommentsCount'][0]['GoodCount']
-        PoorCount = comment_dict['CommentsCount'][0]['PoorCount']
+        DefaultGoodCount = comment_dict['CommentsCount'][0]['DefaultGoodCountStr']
+        GoodCount = comment_dict['CommentsCount'][0]['GoodCountStr']
+        PoorCount = comment_dict['CommentsCount'][0]['PoorCountStr']
         PoorRate = comment_dict['CommentsCount'][0]['PoorRate']
 
         item = LenovoItem()
