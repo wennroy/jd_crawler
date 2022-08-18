@@ -16,7 +16,7 @@ class LenovoPipeline:
     ## Connect to Mysql
     def __init__(self):
         self.item_list = []
-        self.search_name = Search_name
+        self.search_name = Search_name.replace("%20","_").replace(" ","")
         '''更改所选数据库
         '''
         if activate_mysql == True:
@@ -88,7 +88,7 @@ class LenovoPipeline:
         if activate_mysql == True:
             self.cursor.close()
             self.connect.close()
-        with open(filename, 'w', newline='', encoding='gbk') as f:
+        with open(filename, 'w', newline='', encoding='utf-8') as f:
             csv_writer = csv.writer(f)
             csv_writer.writerow(
                 ['item_id', 'Price', 'Name', 'Shopname', 'commentNum', 'GoodRate', 'GoodCount', 'DefaultGoodRate',
@@ -99,6 +99,6 @@ class LenovoPipeline:
                 except:
                     cannot_save.append(self.item_list[i])
                     continue
-        if not connot_save == []:
+        if not cannot_save == []:
             print('不能保存至CSV的商品有：')
             print(cannot_save)
